@@ -2,6 +2,8 @@ package jjBan.je.user;
 
 import java.util.Comparator;
 
+import javax.persistence.ManyToOne;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jjBan.je.core.Actividad;
@@ -13,11 +15,12 @@ public class Usuario implements Comparator<Usuario> {
 	private String nombre;
 	private String mail;
 	private String login;
-	private String password;
 	@JsonIgnore
+	private String password;
+
 	private Actividad actividad;
 	
-	
+	@ManyToOne(targetEntity = Actividad.class)
 	public Actividad getActividad() {
 		return actividad;
 	}
@@ -77,6 +80,16 @@ public class Usuario implements Comparator<Usuario> {
 		this.password = password;
 	}
 
+	public Usuario(String nombre, String mail, String login, 
+			String password, Actividad actividad) {
+
+		this.id =  MainRutas.generaId("user");
+		this.nombre = nombre;
+		this.mail = mail;
+		this.login = login;
+		this.password = password;
+		this.actividad = actividad;
+	}
 
 	@Override
 	public String toString() {

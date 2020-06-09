@@ -10,8 +10,11 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import jjBan.je.user.Usuario;
 
 //@Repository
-@CrossOrigin(origins = "http://localhost:4200") 
-@RepositoryRestResource(path = "usuarios")
+//@CrossOrigin(origins = "http://localhost:4200") 
+@RepositoryRestResource(path = "usuarios",
+//						exported=false,
+						itemResourceRel="usuario",
+						collectionResourceRel="usuarios")
 public interface UsuariosDAO extends JpaRepository<Usuario, String> {
 
 	@RestResource(path = "nombre")

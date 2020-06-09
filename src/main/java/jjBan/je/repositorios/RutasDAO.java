@@ -12,8 +12,11 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import jjBan.je.core.Ruta;
 
 //@Repository
-@CrossOrigin(origins = "http://localhost:4200") 
-@RepositoryRestResource(path="rutas")
+//@CrossOrigin(origins = "http://localhost:4200") 
+@RepositoryRestResource(path="rutas",
+						//exported=false,
+						itemResourceRel="ruta",
+						collectionResourceRel="rutas")
 public interface RutasDAO extends JpaRepository<Ruta, String>{
 	
     @RestResource(path="nombre")

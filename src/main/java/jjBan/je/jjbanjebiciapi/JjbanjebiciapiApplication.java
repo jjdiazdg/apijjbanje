@@ -16,6 +16,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.PropertySource;
 
@@ -30,12 +31,12 @@ import jjBan.je.core.TipoActividad;
 import jjBan.je.repositorios.ActividadDAO;
 import jjBan.je.repositorios.RutasDAO;
 import jjBan.je.repositorios.UsuariosDAO;
-import jjBan.je.rest.MixIns;
 import jjBan.je.user.Usuario;
 
-@PropertySource({"classpath:config/rest.properties"})
+//@PropertySource({"classpath:config/rest.properties", "classpath:config/jackson.properties"})
 @SpringBootApplication
 @ImportResource({ "classpath:config/jpa-config.xml" })
+@Import(ConfiguracionPorJava.class)
 public class JjbanjebiciapiApplication {
 
 	private static final Logger log = LoggerFactory.getLogger(JjbanjebiciapiApplication.class);
@@ -43,19 +44,23 @@ public class JjbanjebiciapiApplication {
 	public static void main(String[] args) throws Exception {
 		ConfigurableApplicationContext context = SpringApplication.run(JjbanjebiciapiApplication.class, args);
 
-		ObjectMapper mapper = new ObjectMapper();
-		mapper.addMixIn(Ruta.class, MixIns.Rutas.class);
-		mapper.addMixIn(DatosTecnicos.class, MixIns.DatosTecnicos.class);
+//		Esto es recordatorio por si no hay fichero de configuracion por Java
+		
+//		ObjectMapper mapper = context.getBean(ObjectMapper.class);
+//		mapper.addMixIn(Ruta.class, MixIns.Rutas.class);
+//		mapper.addMixIn(DatosTecnicos.class, MixIns.DatosTecnicos.class);
 //		mapper.addMixIn(Actividad.class, MixIns.Actividad.class);
+		
+//		Esto es para cargar las rutas desde los ficheros 
+		
+//		RutasDAO rutasDAO = context.getBean(RutasDAO.class);
+//		serialJSON(mapper, rutasDAO, "./data/activities7.json");
+		
+//		Esto es para agregar rutas
+//
+//		rutasDAO.save(addRutaConDatosTecnicos("Ciudad Real", "Granatula", TipoActividad.SENDERISMO,
+//		NivelDificultad.FACIL, addDatosTecnicos(), new Date(), "Globerada", "Ciudad RealLiteral - Granatula"));
 
-		RutasDAO rutasDAO = context.getBean(RutasDAO.class);
-		SerialJSON(mapper, rutasDAO, "./data/activities7.json");
-
-		rutasDAO.save(addRutaConDatosTecnicos("Ciudad Real", "Granatula", TipoActividad.SENDERISMO,
-				NivelDificultad.FACIL, addDatosTecnicos(), new Date(), "Globerada", "Ciudad RealLiteral - Granatula"));
-
-		// datosTecnicosDAO.findAll().stream().map(DatosTecnicos::toString).forEach(log::trace);
-		rutasDAO.findByNombreContainingIgnoreCase("Zur").stream().map(Ruta::toString).forEach(log::info);
 
 		ActividadDAO actividadDAO = context.getBean(ActividadDAO.class);
 		UsuariosDAO usuariosDAO = context.getBean(UsuariosDAO.class);
@@ -69,19 +74,17 @@ public class JjbanjebiciapiApplication {
 		actividadDAO.findAll().stream().map(Actividad::toString).forEach(log::trace);
 		
 		
-
-//		   context.close();
+//		context.close();
 		
 	}
 
-	static void SerialJSON(ObjectMapper mapper, RutasDAO rutasDAO, String fichero// , DatosTecnicosDAO datosTecnicosDAO
-	) {
+	static void serialJSON(ObjectMapper mapper, RutasDAO rutasDAO, String fichero) {
 
 		mapper.configure(Feature.ALLOW_UNQUOTED_FIELD_NAMES, true);
 		try (BufferedReader br = new BufferedReader(new FileReader(fichero))) {
 			String linea;
 			Ruta ruta; // = new Ruta();
-			DatosTecnicos datosTecnicos;// = ruta.getDatosTecnicos();
+			DatosTecnicos datosTecnicos; 
 			while ((linea = br.readLine()) != null) {
 				if (linea.startsWith("{") && linea.endsWith("}")) {
 					ruta = (mapper.readValue(linea, Ruta.class));
@@ -93,9 +96,6 @@ public class JjbanjebiciapiApplication {
 				}
 			}
 
-//			System.err.println(datosTecnicos);
-			// datosTecnicosDAO.saveAll(datosTecnicos);
-
 		} catch (FileNotFoundException ex) {
 			System.out.println(ex.getMessage());
 		} catch (IOException ex) {
@@ -103,7 +103,7 @@ public class JjbanjebiciapiApplication {
 		}
 
 	}
-
+	
 	static Usuario anadirUsuario() {
 
 		return new Usuario("Luis", "luis@hotmail.com", "admin", generaPass());
