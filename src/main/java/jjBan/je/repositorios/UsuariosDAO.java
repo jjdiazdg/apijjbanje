@@ -6,11 +6,14 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.data.rest.core.annotation.RestResource;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import jjBan.je.user.Usuario;
 
 //@Repository
-//@CrossOrigin(origins = "http://localhost:4200") 
+//@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, 
+		RequestMethod.PUT, RequestMethod.DELETE, RequestMethod.PATCH})
 @RepositoryRestResource(path = "usuarios",
 //						exported=false,
 						itemResourceRel="usuario",
