@@ -32,6 +32,7 @@ public class ConfiguracionPorJava {
 		mapper.addMixIn(Ruta.class, MixIns.Rutas.class);
 		mapper.addMixIn(DatosTecnicos.class, MixIns.DatosTecnicos.class);
 		mapper.addMixIn(Actividad.class, MixIns.Actividad.class);
+		mapper.addMixIn(Object.class, MixIns.IgnoreHibernatePropertiesInJackson.class);
 		
 		return mapper;
 	}

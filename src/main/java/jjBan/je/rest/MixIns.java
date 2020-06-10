@@ -2,6 +2,7 @@ package jjBan.je.rest;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -19,7 +20,7 @@ public abstract class MixIns {
 	@JsonProperty("duracion")
 	@JsonDeserialize(using = LocalTimeDeserializer.class)
     @JsonSerialize(using = LocalTimeSerializer.class)
-	@JsonFormat(pattern = "hh:mm:ss")
+	@JsonFormat(pattern = "HH:mm")
 		abstract LocalTime getDuracion(); 
 	
 	}
@@ -29,21 +30,30 @@ public abstract class MixIns {
 	public static interface Rutas {
 		
 		@JsonProperty("fecha")
-		@JsonFormat(pattern = "dd MMM. yyyy hh:mm:ss")
+//		@JsonDeserialize(using = LocalDateDeserializer.class)
+//	    @JsonSerialize(using = LocalDateSerializer.class)
+//		@JsonFormat(pattern = "dd MMM. yyyy hh:mm:ss") // Este formato viene arrastrado de Strava..
 		abstract LocalDateTime getFecha();
+		
+		
+		
 		
 	}
 	
 public static interface Actividad {
 		
 		@JsonProperty("fecha")
-		@JsonDeserialize(using = LocalTimeDeserializer.class)
-	    @JsonSerialize(using = LocalTimeSerializer.class)
-		@JsonFormat(pattern = "hh:mm:ss")
+//		@JsonDeserialize(using = LocalDateDeserializer.class)
+//	    @JsonSerialize(using = LocalDateSerializer.class)
 		abstract LocalDateTime getFecha();
 		
 	}
 	
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+public static interface IgnoreHibernatePropertiesInJackson{
+	
+}
+
 	@JsonIgnoreType // Ignora un tipo por completo
 	public static interface IgnorarTipo {}
 	

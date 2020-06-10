@@ -20,12 +20,11 @@ import java.util.concurrent.ThreadLocalRandom;
 import jjBan.je.core.Actividad;
 import jjBan.je.core.Consulta;
 import jjBan.je.core.DatosTecnicos;
-import jjBan.je.core.Localizable;
+
 import jjBan.je.core.NivelDificultad;
 import jjBan.je.core.Ruta;
-import jjBan.je.core.Suscripcion;
 import jjBan.je.core.TipoActividad;
-import jjBan.je.repositorios.UsuariosDAO;
+
 import jjBan.je.user.Usuario;
 
 public class MainRutas {
@@ -95,7 +94,7 @@ public class MainRutas {
 //		misRutas.forEach(System.out::println);
 		System.out.println();
 		
-//		CONSULTO LAS RUTAS DE MOUNTANBIKE DE MÁS DE 2 HORAS DE DURACION Y LAS IMPRIMO
+//		CONSULTO LAS RUTAS DE MOUNTANBIKE DE Mï¿½S DE 2 HORAS DE DURACION Y LAS IMPRIMO
 		Consulta.consultaRutasPorActividadyDuracion(misRutas, TipoActividad.MOUNTAIN_BIKE, 2).forEach(System.out::println);
 	 
 	}

@@ -53,13 +53,13 @@ public class JjbanjebiciapiApplication {
 		
 //		Esto es para cargar las rutas desde los ficheros 
 		
-//		RutasDAO rutasDAO = context.getBean(RutasDAO.class);
+		RutasDAO rutasDAO = context.getBean(RutasDAO.class);
 //		serialJSON(mapper, rutasDAO, "./data/activities7.json");
 		
 //		Esto es para agregar rutas
 //
-//		rutasDAO.save(addRutaConDatosTecnicos("Ciudad Real", "Granatula", TipoActividad.SENDERISMO,
-//		NivelDificultad.FACIL, addDatosTecnicos(), new Date(), "Globerada", "Ciudad RealLiteral - Granatula"));
+		rutasDAO.save(addRutaConDatosTecnicos("Ciudad Real", "Granatula", TipoActividad.SENDERISMO,
+		NivelDificultad.FACIL, addDatosTecnicos(), new Date(), "Globerada", "Ciudad RealLiteral - Granatula"));
 
 
 		ActividadDAO actividadDAO = context.getBean(ActividadDAO.class);
