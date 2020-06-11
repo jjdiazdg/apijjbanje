@@ -13,10 +13,9 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 
 import jjBan.je.core.Ruta;
 
-//@Repository
 //@CrossOrigin(origins = "http://localhost:4200") 
-@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, 
-		RequestMethod.PUT, RequestMethod.DELETE, RequestMethod.PATCH})
+//@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, 
+//		RequestMethod.PUT, RequestMethod.DELETE, RequestMethod.PATCH})
 @RepositoryRestResource(path="rutas",
 						//exported=false,
 						itemResourceRel="ruta",

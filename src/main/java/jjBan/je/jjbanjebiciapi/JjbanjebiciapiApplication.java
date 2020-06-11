@@ -31,12 +31,13 @@ import jjBan.je.core.TipoActividad;
 import jjBan.je.repositorios.ActividadDAO;
 import jjBan.je.repositorios.RutasDAO;
 import jjBan.je.repositorios.UsuariosDAO;
+import jjBan.je.rest.ConfiguracionRest;
 import jjBan.je.user.Usuario;
 
 //@PropertySource({"classpath:config/rest.properties", "classpath:config/jackson.properties"})
 @SpringBootApplication
 @ImportResource({ "classpath:config/jpa-config.xml" })
-@Import(ConfiguracionPorJava.class)
+@Import({ConfiguracionPorJava.class, ConfiguracionRest.class})
 public class JjbanjebiciapiApplication {
 
 	private static final Logger log = LoggerFactory.getLogger(JjbanjebiciapiApplication.class);

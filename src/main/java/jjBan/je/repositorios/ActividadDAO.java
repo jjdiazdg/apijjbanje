@@ -12,10 +12,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import jjBan.je.core.Actividad;
 import jjBan.je.core.TipoActividad;
 
-
 //@CrossOrigin(origins = "http://localhost:4200") 
-@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, 
-		RequestMethod.PUT, RequestMethod.DELETE, RequestMethod.PATCH})
+//@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, 
+//		RequestMethod.PUT, RequestMethod.DELETE, RequestMethod.PATCH})
 @RepositoryRestResource(path="actividades",
 //						exported=false,
 						itemResourceRel="actividad",
